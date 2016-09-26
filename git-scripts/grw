@@ -1,0 +1,6 @@
+#!/bin/bash
+
+set -e
+
+git checkout $1
+git rebase work

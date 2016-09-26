@@ -1,0 +1,7 @@
+#!/bin/bash
+
+git branch -d work
+set -e
+
+git branch work :/^===$1
+git checkout work

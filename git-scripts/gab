@@ -1,0 +1,10 @@
+#!/bin/bash
+set -e
+
+git checkout $1
+git branch -d work
+
+if [ -n "$2" ]; then
+  git branch work :/^===$2
+  git checkout work
+fi
