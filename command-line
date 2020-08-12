@@ -1,0 +1,3 @@
+
+# xargs, invoking shell command multiple times, with % as the replacement field
+cat guids | xargs -I % sh -c 'aws events delete-rule --name delete-rule-%'
