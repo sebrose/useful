@@ -1,0 +1,55 @@
+We can invoke TextText in batch mode with:
+
+texttest -d `pwd`/texttest/ -a repo-atm -b BatchName
+
+We need to know the location of the repository and the TextTest test suite extension:
+- the extension is used in the call to TextTest
+- the repo path is needed to locate source and approved outputs
+
+0) Clear output from previous build
+1) Get first repo (or specified repo)
+2) Checkout first version (or specified version)
+3) Invoke TextTest (need absolute path to TextTest suite root folder)
+4) Build project
+5) Process output
+6) Compare with approved output (captured as HTML?)
+7) Record result : SOMEWHERE THAT NEXT CHECKOUT WON'T OVERWRITE
+
+
+GIT
+
+This lets us revert some changes:
+  git reflog
+  git reset --hard {HEAD@xx}
+
+This lets us rebase branches back onto master (or any other branch)
+  git checkout <source-branch>
+  git rebase -p --onto <target-branch> HEAD~xx
+    where xx is the number of commits from head to move
+  
+SCRIPTS
+
+git checkout work: gcw <commit comment>
+ - deletes work
+ - branches work at comment
+ - checks out work
+ 
+git rebase work: grw <branch> 
+ - checkout branch
+ - git rebase work
+ 
+texttest batch: ttb 
+
+texttest interactive: tti
+
+texttest setup: tts <branch> <commit comment>
+  uses gcw, ttb and grw to grab the output and  automatically approve it 
+
+From Cucumber-JVM-Book folder:
+- to run builds on all commits
+  srjcuc/Book/script/build_all.rb repo-atm-example/
+  
+results in results.txt  
+  
+- to extract all for svn
+  srjcuc/Book/script/extract.rb repo-checkout/ srjcuc/Book/code/
